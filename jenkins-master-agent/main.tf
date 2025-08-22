@@ -83,7 +83,7 @@ resource "aws_instance" "jenkins_servers" {
   tags ={
         Name = var.jenkins_instances[count.index]
     }
-  #user_data = file("userdata.sh")
+  user_data = file("userdata.sh")
   
 }
 

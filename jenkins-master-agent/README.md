@@ -5,17 +5,31 @@ nvme0n1p1 through nvme0n1p4 are physical partitions on the nvme0n1 physical disk
 
 RootVG-rootVol is a logical volume (LV), which is the root directory of your Linux filesystem (/). This LV resides within a larger container called a Volume Group (RootVG), which itself is a single partition (nvme0n1p4).
 
-Expand the partition (nvme0n1p4) to use all available disk space: sudo growpart /dev/nvme0n1 4.
+Expand the partition (nvme0n1p4) to use all available disk space: 
+
+## sudo growpart /dev/nvme0n1 4.
 
 This step is correct and necessary to expand the physical container that holds the LVM-managed volumes.
 
-Expand the logical volume: You must now extend the logical volume (RootVG-rootVol) to use the newly allocated space. This is the missing step in your understanding.
+Expand the logical volume: You must now extend the logical volume (RootVG-rootVol) to use the newly allocated space
 
-Use sudo lvextend -l +100%FREE /dev/mapper/RootVG-rootVol. This will expand the logical volume to take up all the free space you just added to the RootVG volume group.
+Use 
 
-Resize the filesystem: sudo xfs_growfs /.
+## sudo lvextend -l +100%FREE /dev/mapper/RootVG-rootVol. 
+This will expand the logical volume to take up all the free space you just added to the RootVG volume group.
 
-This command is correct. It makes the newly expanded logical volume space usable by the operating system.
+## lvextend -L +20G /dev/mapper/RootVG/rootVol
+## lvextend -L +10G /dev/mapper/RootVG/varVol
+
+
+Resize the filesystem: 
+
+## sudo xfs_growfs /
+## xfs_growfs /var
+
+It makes the newly expanded logical volume space usable by the operating system.
+
+sudo lvextend -L +5G /dev/mapper/RootVG-varVol
 
 # Analogy Refined
 
