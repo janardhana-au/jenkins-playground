@@ -38,7 +38,7 @@ pipeline {
                 script {
 
                     sh """
-                        npm install
+                        npm install catalogue/package.json
                     """
                 }
             }
