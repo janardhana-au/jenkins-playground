@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        echo "Hello Build
+                        echo "Hello Build"
                         sleep 10
                     """
                 }
@@ -21,6 +21,7 @@ pipeline {
         stage('test') {
             steps {
                 script {
+
                     sh """
                         echo "Hello pipeline testing"
                     """
