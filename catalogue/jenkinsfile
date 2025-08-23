@@ -18,16 +18,7 @@ pipeline {
                 
             }
         }
-        stage('test') {
-            steps {
-                script {
-
-                    sh """
-                        echo "Hello pipeline testing"
-                    """
-                }
-            }
-        }
+        
         stage('Read JSON') {
             steps {
                 script {
@@ -39,6 +30,16 @@ pipeline {
                     echo "Project Name: ${config.name}"
                     appVersion = config.version
                     echo "Project description: ${config.description}"
+                }
+            }
+        }
+        stage('npm install') {
+            steps {
+                script {
+
+                    sh """
+                        npm install
+                    """
                 }
             }
         }
