@@ -38,7 +38,7 @@ pipeline {
                 script {
 
                     sh """
-                        npm install jenkins-playground/catalogue/
+                        npm install catalogue/
                     """
                 }
             }
