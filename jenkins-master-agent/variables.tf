@@ -1,7 +1,7 @@
-variable "jenkins_instances" {
+variable "jenkins_server" {
     type = list(string)
-    default = [ "Jenkins_server","Agent-1"]
-    # default = [ "Jenkins_server"]
+    # default = [ "Jenkins_server","Agent-1"]
+    default = [ "Jenkins_server"]
     
   
 }
@@ -10,3 +10,11 @@ variable "jenkins_instances" {
     default = [ "22", "80" ]
   
 } */
+
+variable "jenkins_agent" {
+    type = list(string)
+    # default = [ "Jenkins_server","Agent-1"]
+    default = [ "Jenkins_agent-1"]
+    
+  
+}

@@ -68,10 +68,10 @@ resource "aws_security_group_rule" "jenkins_sg_rule" {
 }
 
 resource "aws_instance" "jenkins_servers" {
-  count = length(var.jenkins_instances)
+  count = length(var.jenkins_server)
   ami           = local.ami_id
   #instance_type = "t2.micro"
-  instance_type = "t3.micro"
+  instance_type = "t3.small"
   root_block_device {
     volume_size = 50
     volume_type = "gp3" # or "gp2", depending on your preference
@@ -81,9 +81,29 @@ resource "aws_instance" "jenkins_servers" {
   subnet_id = aws_subnet.public_subnet_ids.id
 
   tags ={
-        Name = var.jenkins_instances[count.index]
+        Name = var.jenkins_server[count.index]
     }
-  user_data = file("userdata.sh")
+  user_data = file("server.sh")
+  
+}
+
+resource "aws_instance" "jenkins_agent" {
+  count = length(var.jenkins_agent)
+  ami           = local.ami_id
+  #instance_type = "t2.micro"
+  instance_type = "t3.small"
+  root_block_device {
+    volume_size = 50
+    volume_type = "gp3" # or "gp2", depending on your preference
+    delete_on_termination = true
+  }
+  vpc_security_group_ids = [aws_security_group.main.id]
+  subnet_id = aws_subnet.public_subnet_ids.id
+
+  tags ={
+        Name = var.jenkins_agent[count.index]
+    }
+  user_data = file("agent.sh")
   
 }
 
