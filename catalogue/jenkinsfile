@@ -1,0 +1,31 @@
+pipeline {
+    agent {
+        label "agent_1"
+    }
+    options {
+        timeout(time:30, unit: 'MINUTES')
+        disableConcurrentBuilds()
+    }
+    stages {
+        stage {
+            steps {
+                script {
+                    sh """
+                    echo "Hello Build
+                    sleep 10
+                    """
+                }
+                
+            }
+        }
+        stage {
+            steps {
+                script {
+                    sh """
+                    echo "Hello pipeline testing"
+                    """
+                }
+            }
+        }
+    }
+}
