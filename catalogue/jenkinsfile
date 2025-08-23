@@ -7,22 +7,22 @@ pipeline {
         disableConcurrentBuilds()
     }
     stages {
-        stage {
+        stage('build') {
             steps {
                 script {
                     sh """
-                    echo "Hello Build
-                    sleep 10
+                        echo "Hello Build
+                        sleep 10
                     """
                 }
                 
             }
         }
-        stage {
+        stage('test') {
             steps {
                 script {
                     sh """
-                    echo "Hello pipeline testing"
+                        echo "Hello pipeline testing"
                     """
                 }
             }
