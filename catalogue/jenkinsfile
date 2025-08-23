@@ -37,7 +37,7 @@ pipeline {
 
                     // Access data from the parsed JSON object
                     echo "Project Name: ${config.name}"
-                    appVersion: ${config.version}"
+                    appVersion: ${config.version}
                     echo "Project description: ${config.description}"
                 }
             }
