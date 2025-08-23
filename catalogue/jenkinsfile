@@ -28,5 +28,19 @@ pipeline {
                 }
             }
         }
+        stage('Read JSON') {
+            steps {
+                script {
+                    
+                    // Read the JSON file
+                    def config = readJSON file: 'catalogue/package.json'
+
+                    // Access data from the parsed JSON object
+                    echo "Project Name: ${config.name}"
+                    echo "Project Version: ${config.version}"
+                    echo "Project description: ${config.description]}"
+                }
+            }
+        }
     }
 }
